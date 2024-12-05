@@ -1,0 +1,112 @@
+# Ansible Galaxy Guide
+
+## What is Ansible Galaxy?
+Ansible Galaxy is a free repository and community platform for sharing Ansible roles, collections, and content. It allows users to find, download, and share pre-built automation content.
+
+## Key Versions and Compatibility
+- Ansible Galaxy CLI Versions:
+  * Ansible Galaxy CLI 1.x (for Ansible 2.9 and earlier)
+  * Ansible Galaxy CLI 2.x (for Ansible 2.10+)
+  * Ansible Galaxy CLI 3.x (for Ansible 4.0+)
+
+## Basic Galaxy Commands
+
+### 1. Galaxy Version Check
+```bash
+# Check Ansible Galaxy version
+ansible-galaxy --version
+```
+
+### 2. Role Management
+```bash
+# Search for roles
+ansible-galaxy search nginx
+
+# Download a role
+ansible-galaxy role install geerlingguy.nginx
+
+# List installed roles
+ansible-galaxy role list
+
+# Remove a role
+ansible-galaxy role remove geerlingguy.nginx
+```
+
+### 3. Collection Management
+```bash
+# Install a collection
+ansible-galaxy collection install community.general
+
+# List installed collections
+ansible-galaxy collection list
+
+# Download collection
+ansible-galaxy collection download nginx
+
+# Remove a collection
+ansible-galaxy collection remove community.general
+```
+
+### 4. Role Creation
+```bash
+# Create a new role scaffold
+ansible-galaxy role init my_custom_role
+
+# Role directory structure created:
+# my_custom_role/
+#   ├── defaults/
+#   ├── files/
+#   ├── handlers/
+#   ├── meta/
+#   ├── tasks/
+#   ├── templates/
+#   └── vars/
+```
+
+### 5. Advanced Galaxy Commands
+```bash
+# Verbose role search
+ansible-galaxy role search nginx -v
+
+# Download role with specific version
+ansible-galaxy role install geerlingguy.nginx:3.0.0
+
+# Import role to Galaxy
+ansible-galaxy role import username/repository
+```
+
+## Configuration File
+Create `~/.ansible/galaxy.yml`:
+```yaml
+---
+# Galaxy server configuration
+server: https://galaxy.ansible.com
+token: your_galaxy_api_token
+
+# Role installation preferences
+roles_path:
+  - /path/to/roles
+  - ~/.ansible/roles
+
+# Collection preferences
+collections_path:
+  - /path/to/collections
+  - ~/.ansible/collections
+```
+
+## Best Practices
+1. Always verify role/collection source
+2. Use trusted, well-maintained roles
+3. Check compatibility with your Ansible version
+4. Review role dependencies
+5. Keep roles and collections updated
+```
+
+### 6. Troubleshooting
+```bash
+# Verbose galaxy operations
+ansible-galaxy role install geerlingguy.nginx -vvv
+
+# Debug connection issues
+ansible-galaxy role install geerlingguy.nginx --force-with-deps
+```

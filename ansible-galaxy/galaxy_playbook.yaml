@@ -1,0 +1,10 @@
+---
+- hosts: webservers
+  roles:
+    # Using a Galaxy-installed role
+    - geerlingguy.nginx
+    
+    # Custom role with Galaxy role as dependency
+    - role: my_custom_nginx_setup
+      vars:
+        nginx_version: latest

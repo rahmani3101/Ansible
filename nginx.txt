@@ -1,0 +1,23 @@
+# Nginx Configuration Notes
+
+## Basic Configuration
+- Default Config: `/etc/nginx/nginx.conf`
+- Web Root: `/var/www/html`
+- Log Files: `/var/log/nginx/`
+
+## Common Commands
+- Start: `systemctl start nginx`
+- Stop: `systemctl stop nginx`
+- Restart: `systemctl restart nginx`
+- Reload: `systemctl reload nginx`
+
+## Configuration Best Practices
+1. Use templates for configuration
+2. Enable SSL/TLS
+3. Configure proper logging
+4. Implement security headers
+5. Use performance optimizations
+
+## Troubleshooting
+- Check syntax: `nginx -t`
+- View error logs: `tail -f /var/log/nginx/error.log`

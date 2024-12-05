@@ -1,0 +1,23 @@
+# Ansible Command Reference
+
+## Basic Commands
+- Ping all hosts: `ansible all -m ping`
+- Run command on all hosts: `ansible all -a "/usr/bin/uptime"`
+
+## Playbook Execution
+- Basic playbook run: `ansible-playbook playbook.yml`
+- Dry run (check mode): `ansible-playbook playbook.yml --check`
+- Verbose output: `ansible-playbook playbook.yml -vvv`
+
+## Privilege Escalation
+- Run with sudo: `ansible-playbook playbook.yml --become`
+
+## Targeting Specific Hosts
+- Specific group: `ansible-playbook playbook.yml -l webservers`
+- Specific host: `ansible-playbook playbook.yml -l web01`
+
+## Useful Flags
+- `-v`: Verbose
+- `-vv`: More verbose
+- `-vvv`: Very verbose (debug mode)
+- `--syntax-check`: Check playbook syntax

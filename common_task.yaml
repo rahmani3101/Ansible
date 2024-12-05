@@ -1,0 +1,47 @@
+---
+- name: Update system packages
+  package:
+    name: '*'
+    state: latest
+
+- name: Install common system packages
+  package:
+    name:
+      - vim
+      - git
+      - htop
+      - fail2ban
+      - ufw
+    state: present
+
+- name: Configure system timezone
+  timezone:
+    name: "{{ system_timezone }}"
+
+- name: Configure SSH
+  template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+  notify: restart sshd
+
+- name: Configure firewall
+  ufw:
+    state: enabled
+    policy: deny
+    rule: allow
+    port: "{{ item }}"
+  loop: "{{ allowed_ports }}"
+
+- name: Create system groups
+  group:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ system_groups }}"
+
+- name: Create system users
+  user:
+    name: "{{ item.username }}"
+    groups: "{{ item.groups }}"
+    shell: "{{ item.shell | default('/bin/bash') }}"
+    state: present
+  loop: "{{ system_users }}"

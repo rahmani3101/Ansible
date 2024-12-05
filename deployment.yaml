@@ -1,0 +1,32 @@
+#!/bin/bash
+set -e
+
+# Deployment script for Ansible project
+ANSIBLE_PROJECT_DIR="/path/to/ansible/project"
+LOG_FILE="/var/log/ansible_deployment.log"
+
+# Function to log messages
+log_message() {
+    echo "[$(date +'%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOG_FILE"
+}
+
+# Main deployment function
+deploy() {
+    log_message "Starting deployment process"
+    
+    cd "$ANSIBLE_PROJECT_DIR"
+    
+    log_message "Running pre-deployment checks"
+    ansible-playbook playbooks/pre_deploy_checks.yml
+    
+    log_message "Deploying application"
+    ansible-playbook playbooks/deploy_app.yml
+    
+    log_message "Running post-deployment tests"
+    ansible-playbook playbooks/post_deploy_tests.yml
+    
+    log_message "Deployment completed successfully"
+}
+
+# Execute deployment
+deploy
